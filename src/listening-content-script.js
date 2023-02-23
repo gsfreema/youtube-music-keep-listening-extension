@@ -1,13 +1,19 @@
-const popupContainer = document.querySelector('ytmusic-popup-container');
+const popupContainerSelector = 'ytmusic-popup-container';
+const popupContainer = document.querySelector(popupContainerSelector);
 
 if (popupContainer) {
-    console.log('ytmusic-popup-container found.');
+    console.log(`${popupContainerSelector} found.`);
 
     const observer = new MutationObserver(() => {
-        const continueLink = popupContainer.querySelector('ytmusic-you-there-renderer a');
+        const continueLinkSelector ='ytmusic-you-there-renderer button';
+        const continueLink = popupContainer.querySelector(continueLinkSelector);
     
         if (continueLink) {
             continueLink.click();
+            console.log('Successfully clicked.');
+        } else {
+            console.warn(`${continueLinkSelector} not found`);
+            console.warn(popupContainer.outerHTML);
         }
     });
 
@@ -18,5 +24,6 @@ if (popupContainer) {
         subtree: true,
     });
 } else {
-    console.log('ytmusic-popup-container not found.');
+    console.warn(`${popupContainerSelector} not found.`);
+    console.warn(document.body.outerHTML);
 }
